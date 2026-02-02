@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; background-color: #ffeef2; font-family: sans-serif; overflow: hidden; }
+        #container { text-align: center; padding: 20px; }
+        h1 { color: #d63384; font-size: 2rem; }
+        .buttons { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
+        button { padding: 15px 30px; font-size: 1.1rem; border: none; border-radius: 50px; cursor: pointer; }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { background-color: #adb5bd; color: white; position: relative; }
+        #success-box img { width: 100%; max-width: 300px; border-radius: 15px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="question-box">
+        <h1>Will you be my Valentine? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+    <div id="success-box" style="display: none;">
+        <h1>YAY! 🎉</h1>
+        <img src="https://media.giphy.com/media/lTQF0ODLLJHza/giphy.gif" alt="celebration">
+    </div>
+</div>
+
+<audio id="celebrationMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+<script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const questionBox = document.getElementById('question-box');
+    const successBox = document.getElementById('success-box');
+
+    const moveButton = () => {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    };
+
+    noBtn.addEventListener('mouseover', moveButton);
+    noBtn.addEventListener('click', moveButton);
+
+    yesBtn.addEventListener('click', () => {
+        questionBox.style.display = 'none';
+        successBox.style.display = 'block';
+        document.getElementById('celebrationMusic').play();
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    });
+</script>
+</body>
+</html>
